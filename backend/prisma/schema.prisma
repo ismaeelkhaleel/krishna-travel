@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id               Int       @id @default(autoincrement())
+  customerId       String    @unique
+  fullName         String
+  mobile           String    @unique
+  whatsapp         String    @unique
+  email            String?
+  dob              DateTime?
+  gender           String?
+  address          String?
+  pincode          String?
+  gstin            String?
+  registrationDate DateTime  @default(now())
+  customerSource   String
+  customerStatus   String    @default("Active")
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  sales            Sale[]
+
+  @@index([customerId])
+  @@index([mobile])
+  @@index([whatsapp])
+}
+
+model Sale {
+  id                Int       @id @default(autoincrement())
+  invoiceId         String    @unique
+  customerId        Int
+  customer          Customer  @relation(fields: [customerId], references: [id])
+  
+  // Booking
+  bookingDate       DateTime
+  bookingCreatedBy  String?
+  branch            String?
+  bookingSource     String
+  customerType      String
+  
+  // Service
+  serviceType       String
+  referenceNumber   String?
+  serviceName       String?
+  remarks           String?
+  
+  // Financial
+  baseAmount        Decimal   @default(0.00) @db.Decimal(10, 2)
+  serviceCharges    Decimal   @default(0.00) @db.Decimal(10, 2)
+  discount          Decimal   @default(0.00) @db.Decimal(10, 2)
+  tax               Decimal   @default(0.00) @db.Decimal(10, 2)
+  totalSaleAmount   Decimal   @db.Decimal(10, 2)
+  
+  // Payment
+  paidAmount        Decimal   @default(0.00) @db.Decimal(10, 2)
+  outstandingAmount Decimal   @default(0.00) @db.Decimal(10, 2)
+  paymentStatus     String
+  paymentMethod     String?
+  
+  // Status
+  bookingStatus     String
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([invoiceId])
+  @@index([customerId])
+  @@index([bookingDate])
+  @@index([serviceType])
+  @@index([paymentStatus])
+  @@index([bookingStatus])
+}
