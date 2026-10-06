@@ -48,6 +48,7 @@ model Sale {
   serviceType       String
   referenceNumber   String?
   serviceName       String?
+  travelDate        DateTime?
   remarks           String?
   
   // Financial

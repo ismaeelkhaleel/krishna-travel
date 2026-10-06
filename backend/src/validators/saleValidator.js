@@ -16,6 +16,7 @@ export const saleSchema = z.object({
   
   referenceNumber: z.string().optional(),
   serviceName: z.string().optional(),
+  travelDate: z.string().optional(),
   remarks: z.string().optional(),
   
   baseAmount: z.number().min(0).optional(),

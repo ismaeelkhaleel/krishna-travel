@@ -19,14 +19,14 @@ export default function NewSale() {
   const [searchStatus, setSearchStatus] = useState('idle');
 
   const [saleData, setSaleData] = useState({
-    invoiceId: `INV-${Math.floor(100000 + Math.random() * 900000)}`, 
+    invoiceId: '', 
     bookingDate: new Date().toISOString().split('T')[0], 
     bookingCreatedBy: '', branch: '',
     bookingSource: 'Walk-in',
     customerType: 'Retail', 
     serviceType: 'Flight', 
     
-    referenceNumber: '', serviceName: '', remarks: '',
+    referenceNumber: '', serviceName: '', travelDate: '', remarks: '',
     
     baseAmount: 0, serviceCharges: 0, discount: 0, tax: 0, paidAmount: 0,
     paymentMethod: 'Cash', paymentStatus: 'Unpaid', bookingStatus: 'Pending'
@@ -200,6 +200,7 @@ export default function NewSale() {
               ]} />
               
               <Input label={getRefLabel()} name="referenceNumber" value={saleData.referenceNumber} onChange={handleSaleChange} placeholder="e.g. ABC123" />
+              <Input label="Travel Date" type="date" name="travelDate" value={saleData.travelDate} onChange={handleSaleChange} />
             </div>
             
             <div className="grid grid-cols-1 gap-6">
@@ -300,7 +301,8 @@ export default function NewSale() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div><p className="text-[10px] uppercase text-gray-500">Service Type</p><p className="font-semibold text-gray-900">{saleData.serviceType}</p></div>
                   <div><p className="text-[10px] uppercase text-gray-500">{getRefLabel()}</p><p className="font-semibold text-gray-900">{saleData.referenceNumber || '-'}</p></div>
-                  <div className="md:col-span-2"><p className="text-[10px] uppercase text-gray-500">Service Name</p><p className="font-semibold text-gray-900">{saleData.serviceName || '-'}</p></div>
+                  <div><p className="text-[10px] uppercase text-gray-500">Travel Date</p><p className="font-semibold text-gray-900">{saleData.travelDate || '-'}</p></div>
+                  <div><p className="text-[10px] uppercase text-gray-500">Service Name</p><p className="font-semibold text-gray-900">{saleData.serviceName || '-'}</p></div>
                 </div>
                 <div className="mt-2"><p className="text-[10px] uppercase text-gray-500">Remarks</p><p className="font-semibold text-gray-900">{saleData.remarks || '-'}</p></div>
               </div>

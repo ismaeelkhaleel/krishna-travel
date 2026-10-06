@@ -55,6 +55,7 @@ export const createSale = async (saleData) => {
         invoiceId,
         customerId: customer.id,
         bookingDate: new Date(restSaleData.bookingDate),
+        travelDate: restSaleData.travelDate ? new Date(restSaleData.travelDate) : null,
         referenceNumber,
         serviceName,
         remarks,

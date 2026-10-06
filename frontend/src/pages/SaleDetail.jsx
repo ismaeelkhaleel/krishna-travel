@@ -69,10 +69,11 @@ export default function SaleDetail() {
                 Service Details
               </h2>
             </div>
-            <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white">
+            <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6 bg-white">
               <div><p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">Service Name</p><p className="font-medium text-gray-900">{sale.serviceName || '-'}</p></div>
+              <div><p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">Travel Date</p><p className="font-medium text-gray-900">{sale.travelDate ? new Date(sale.travelDate).toLocaleDateString() : '-'}</p></div>
               <div><p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">Reference Number</p><p className="font-medium text-gray-900">{sale.referenceNumber || '-'}</p></div>
-              <div className="sm:col-span-2"><p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">Remarks</p><p className="font-medium text-gray-900">{sale.remarks || '-'}</p></div>
+              <div className="sm:col-span-3"><p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">Remarks</p><p className="font-medium text-gray-900">{sale.remarks || '-'}</p></div>
             </div>
           </Card>
 
